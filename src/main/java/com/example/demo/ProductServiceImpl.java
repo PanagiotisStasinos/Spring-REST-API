@@ -39,4 +39,16 @@ public class ProductServiceImpl implements ProductService {
         products.add(new Product(productID, productName, productPrice));
     }
 
+    public void deleteProduct(Long id) {
+        Iterator<Product> iterator = products.iterator();
+        while(iterator.hasNext()) {;
+            Product product = iterator.next();
+            System.out.println(product.getProductID());
+            if (product.getProductID().equals(id)) {
+                products.remove(product);
+                break;  // remove changes the len of the list and breaks the iterator
+            }
+        }
+    }
+
 }

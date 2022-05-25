@@ -33,4 +33,13 @@ public class ProductController{
         map.put("status", "Product added!");
         return map;
     }
+
+    @DeleteMapping("/{id}")
+    public Map<String, Object> deleteProduct(@PathVariable("id") Long id) {
+        productservice.deleteProduct(id);
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("status", "Product deleted!");
+        return map;
+    }
 }
