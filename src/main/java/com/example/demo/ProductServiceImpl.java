@@ -26,7 +26,6 @@ public class ProductServiceImpl implements ProductService {
         Iterator<Product> iterator = products.iterator();
         while(iterator.hasNext()) {;
             Product product = iterator.next();
-            System.out.println(product.getProductID());
             if (product.getProductID().equals(id)) {
                 return product;
             }
@@ -35,20 +34,44 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
-    public void createProduct(Long productID, String productName, Integer productPrice) {
+    public Product createProduct(Long productID, String productName, Integer productPrice) {
         products.add(new Product(productID, productName, productPrice));
+
+        Iterator<Product> iterator = products.iterator();
+        while(iterator.hasNext()) {;
+            Product product = iterator.next();
+            if (product.getProductID().equals(productID)) {
+                return product;
+            }
+        }
+        return null;
     }
 
-    public void deleteProduct(Long id) {
+    public Integer deleteProduct(Long id) {
         Iterator<Product> iterator = products.iterator();
         while(iterator.hasNext()) {;
             Product product = iterator.next();
             System.out.println(product.getProductID());
             if (product.getProductID().equals(id)) {
                 products.remove(product);
-                break;  // remove changes the len of the list and breaks the iterator
+                return 0;
             }
         }
+        return -1;
     }
+
+    public Integer modifyProductPrice(Long id){
+        Iterator<Product> iterator = products.iterator();
+        while(iterator.hasNext()) {;
+            Product product = iterator.next();
+            System.out.println(product.getProductID());
+            if (product.getProductID().equals(id)) {
+                product.setProductPrice(product.getProductPrice()+1);
+                return 0;
+            }
+        }
+        return -1;
+    }
+
 
 }
